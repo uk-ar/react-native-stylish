@@ -1,6 +1,6 @@
 {
   "name": "react-native-stylish",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Easy to use declarative transitions and a standard set of animations for React Native",
   "main": "index.js",
   "scripts": {
@@ -28,10 +28,16 @@
     "url": "https://github.com/uk-ar/react-native-stylish/issues"
   },
   "homepage": "https://github.com/uk-ar/react-native-stylish#readme",
+  "jest": {
+    "preset": "jest-react-native"
+  },
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-eslint": "^7.1.0",
-    "eslint": "^3.8.1",
-    "eslint-plugin-react": "^6.4.1"
+    "react": "15.3.2",
+    "react-native": "0.35.0",
+    "babel-jest": "^16.0.0",
+    "babel-preset-react-native": "^1.9.0",
+    "jest": "^16.0.2",
+    "jest-react-native": "^16.0.0",
+    "react-test-renderer": "^15.3.2"
   }
 }
