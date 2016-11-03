@@ -32,12 +32,12 @@ function createStylishComponent(component){
       // console.log('willReceiveProps', nextProps);
       this.animateTo(nextProps.style);
     }
-    animate(fromValues, toValues) {
+    animate(fromValues, toValues,onComplete) {
       this.prevStyle = fromValues;
-      return this.animateTo(toValues);
+      return this.animateTo(toValues,onComplete);
     }
-    animateTo(nextStyle) {
-      return this.getAnimationTo(nextStyle).start()
+    animateTo(nextStyle,onComplete) {
+      return this.getAnimationTo(nextStyle).start(onComplete)
     }
     getAnimation(fromValues, toValues){
       this.prevStyle = fromValues;
@@ -46,7 +46,7 @@ function createStylishComponent(component){
     // https://github.com/joshwcomeau/react-flip-move#enterleave-animations
     getAnimationTo(nextStyle){
       return {
-        start:()=>{
+        start:(onComplete)=>{
           // duration,easing jquery
           // console.log('animate');
           // this.animating = true;
@@ -89,20 +89,20 @@ function createStylishComponent(component){
           // TimingAnimationConfigSingle
           this.prevStyle = next;
           const animationConfig = this.props.animationConfig;
-          return new Promise((resolve, reject) => {
+          //return new Promise((resolve, reject) => {
+          this.setState({ animatedStyle }, () => {
             InteractionManager.runAfterInteractions(() => {
-              this.setState({ animatedStyle }, () => {
                 Animated.timing(
                   this.counter,
                   { ...animationConfig, toValue: 1 }// useNativeDriver: true android only
-                ).start(() => {
-                  resolve();
-                });
+                ).start(()=>
+                  InteractionManager.runAfterInteractions(onComplete)
+                );
                 /* setTimeout(()=>
                  *   )*/
               });
             })
-          });
+          //});
         }
       }
     }
