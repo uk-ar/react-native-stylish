@@ -1,4 +1,5 @@
 import React from 'react';
+import styleEqual from 'style-equal';
 
 import {
   StyleSheet,
@@ -29,8 +30,9 @@ function createStylishComponent(component){
       // console.log("const")
     }
     componentWillReceiveProps(nextProps) {
-      // console.log('willReceiveProps', nextProps);
-      this.animateTo(nextProps.style);
+      if(!styleEqual(this.props.style, nextProps.style)){
+        this.animateTo(nextProps.style);
+      }
     }
     animate(fromValues, toValues,onComplete) {
       this.prevStyle = fromValues;
