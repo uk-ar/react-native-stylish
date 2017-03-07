@@ -50,7 +50,7 @@ function createStylishComponent(component){
       return {
         start:(onComplete)=>{
           // duration,easing jquery
-          // console.log('animate');
+          console.log('animate');
           // this.animating = true;
           this.counter = new Animated.Value(0);
           const current = StyleSheet.flatten(this.prevStyle);
@@ -93,17 +93,15 @@ function createStylishComponent(component){
           const animationConfig = this.props.animationConfig;
           //return new Promise((resolve, reject) => {
           this.setState({ animatedStyle }, () => {
-            InteractionManager.runAfterInteractions(() => {
+            //InteractionManager.runAfterInteractions(() => {
                 Animated.timing(
                   this.counter,
                   { ...animationConfig, toValue: 1 }// useNativeDriver: true android only
-                ).start(()=>
-                  InteractionManager.runAfterInteractions(onComplete)
-                );
+                ).start(onComplete);
                 /* setTimeout(()=>
                  *   )*/
               });
-            })
+        //})
           //});
         }
       }
